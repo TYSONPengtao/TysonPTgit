@@ -514,6 +514,7 @@
             "static/videos/5.mp4"
         ];
 
+        // 总是从第一个视频开始播放
         let currentVideoIndex = 0;
         let customDurationTimeout = null;
 
@@ -532,8 +533,10 @@
             videoElement.classList.remove('fade-in');
             void videoElement.offsetWidth; // 强制重新渲染动画
 
-            // 更新视频索引
+            // 按数字顺序更新视频索引 (1.mp4, 2.mp4, etc.)
             currentVideoIndex = (currentVideoIndex + 1) % videoSources.length;
+            
+            console.log("按顺序播放视频: " + videoSources[currentVideoIndex]);
             
             // 加载下一个视频
             videoElement.src = videoSources[currentVideoIndex];
