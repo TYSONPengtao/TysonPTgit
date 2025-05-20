@@ -222,6 +222,31 @@
             );
         }
 
+        /* 添加视频在移动设备上的响应式样式 */
+        @media (max-width: 768px) {
+            .hero-video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                mask-image: radial-gradient(
+                    circle at center,
+                    black 50%,
+                    rgba(0,0,0,0.8) 60%,
+                    rgba(0,0,0,0.6) 70%,
+                    rgba(0,0,0,0.4) 80%,
+                    transparent 90%
+                );
+                -webkit-mask-image: radial-gradient(
+                    circle at center,
+                    black 50%,
+                    rgba(0,0,0,0.8) 60%,
+                    rgba(0,0,0,0.6) 70%,
+                    rgba(0,0,0,0.4) 80%,
+                    transparent 90%
+                );
+            }
+        }
+
         .hero-video.fade-in {
             opacity: 0.95;
             filter: blur(2px);
@@ -477,7 +502,10 @@
         const videoElement = document.getElementById('heroVideo');
         const loadingIndicator = document.getElementById('loadingIndicator');
 
-        // 视频源列表
+        // 检测是否为移动设备
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // 视频源列表 - 可以为移动设备提供不同分辨率的视频
         const videoSources = [
             "static/videos/1.mp4",
             "static/videos/2.mp4",
@@ -509,6 +537,13 @@
             
             // 加载下一个视频
             videoElement.src = videoSources[currentVideoIndex];
+            
+            // 如果是移动设备，设置较低质量以优化性能
+            if (isMobile) {
+                videoElement.setAttribute('playsinline', '');
+                videoElement.setAttribute('muted', '');
+                videoElement.setAttribute('preload', 'metadata');
+            }
 
             // 当视频可以播放时
             videoElement.oncanplay = () => {
@@ -523,6 +558,12 @@
             videoElement.play().catch(error => {
                 console.error('视频播放失败:', error);
                 loadingIndicator.style.display = 'none';
+                
+                // 如果视频无法播放，尝试其他方式或显示备用内容
+                if (isMobile) {
+                    // 在移动设备上可能需要用户交互才能播放视频
+                    videoElement.setAttribute('poster', 'static/images/poster.jpg');
+                }
             });
 
             // 特殊处理：如果当前是 2.mp4，则在 41 秒后自动切换
@@ -546,9 +587,27 @@
 
         // 初始加载第一个视频
         videoElement.src = videoSources[currentVideoIndex];
+        
+        // 设置移动设备的属性
+        if (isMobile) {
+            videoElement.setAttribute('playsinline', '');
+            videoElement.setAttribute('muted', '');
+            videoElement.setAttribute('preload', 'metadata');
+        }
+        
         videoElement.onloadeddata = () => {
             videoElement.classList.add('fade-in');
-            videoElement.play().catch(console.error);
+            videoElement.play().catch(error => {
+                console.error('视频播放失败:', error);
+                
+                // 移动设备上需要用户交互才能播放视频的处理
+                if (isMobile) {
+                    // 添加点击事件，让用户点击后播放视频
+                    document.querySelector('.hero').addEventListener('click', function() {
+                        videoElement.play();
+                    }, {once: true});
+                }
+            });
 
             // 如果初始视频是 2.mp4，也设置 41 秒限制
             if (videoElement.src.includes('2.mp4')) {
@@ -558,8 +617,20 @@
             }
         };
 
-        // 每 17 秒切换一次视频（默认行为）
-        setInterval(changeVideo, 17000);
+        // 设置视频轮播间隔 - 在移动设备上可以设置更长的间隔以节省流量
+        const videoInterval = isMobile ? 25000 : 17000; // 移动设备25秒，桌面设备17秒
+        setInterval(changeVideo, videoInterval);
+        
+        // 页面可见性变化时的处理，以优化性能
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                // 页面不可见时暂停视频
+                videoElement.pause();
+            } else {
+                // 页面可见时播放视频
+                videoElement.play().catch(console.error);
+            }
+        });
     </script>
     <script>
         // 鼠标悬停显示联系方式
