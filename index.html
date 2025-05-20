@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Janes - Military Intelligence</title>
+    <title>彭涛TysonPT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -45,17 +45,24 @@
             clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
         }
         .nav-links {
+            display: none; /* Hide the original navigation from header */
+        }
+        
+        /* 新添加的导航按钮样式，放在内容区域 */
+        .content-nav {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             list-style: none;
-            gap: 120px; /* 间距已加倍 */
-            padding: 0 40px; /* 添加水平内边距防止贴边 */
+            gap: 30px;
+            margin: 30px 0;
+            padding: 0 15px;
         }
 
-        .nav-links a {
+        .content-nav a {
             color: #FFFFFF;
             text-decoration: none;
-            font-size: 22px;
+            font-size: 18px;
             font-weight: bold;
             font-family: 'Playfair Display', serif;
             background: linear-gradient(45deg, rgba(255, 140, 0, 0.79), rgba(255, 69, 0, 0.79));
@@ -64,18 +71,19 @@
             color: transparent;
             transition: all 0.3s ease-in-out;
             display: inline-block;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border: 2px solid transparent;
             border-radius: 10px;
             box-shadow: none;
+            text-align: center;
         }
 
-        .nav-links a:hover {
-            transform: scale(1.2);
-            text-shadow: 0 0 18px rgba(255, 140, 0, 0.8);
+        .content-nav a:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 15px rgba(255, 140, 0, 0.8);
             border-color: rgba(255, 69, 0, 1);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5),
-                inset 0 3px 6px rgba(255, 255, 255, 0.35);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5),
+                inset 0 2px 5px rgba(255, 255, 255, 0.35);
             animation: glow 1.5s infinite alternate;
         }
 
@@ -141,7 +149,44 @@
             display: flex;
             justify-content: flex-start;
             align-items: center; /* 垂直居中 */
-        }        .hero-video {
+        }
+        
+        /* 添加响应式设计 */
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .hero-content {
+                padding: 60px 15px !important;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px !important;
+                white-space: normal !important;
+            }
+            
+            .hero-content p {
+                font-size: 16px !important;
+            }
+            
+            .content-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-buttons {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .btn {
+                margin: 5px 0;
+            }
+        }
+        
+        .hero-video {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -402,11 +447,6 @@
             <div class="logo-icon"></div>
             TysonPT
         </div>
-        <ul class="nav-links">
-            <li><a href="#Thoughts">想说的话 (Thoughts)</a></li>
-            <li><a href="#About Me">人生发展轴 (About Me)</a></li>
-            <li><a href="#Insights">世界之我见 (Insights)</a></li>
-        </ul>
         <div class="nav-buttons">
             <a href="#contact" class="btn btn-contact" onmouseover="showContactInfo()" onmouseout="hideContactInfo()">联系 (Contact)</a>
             <div id="contactTooltip" class="contact-tooltip" onmouseover="keepTooltipVisible()" onmouseout="hideContactInfo()">
@@ -422,19 +462,17 @@
             <p>欢迎来到我的个人网站。这是一个展示思考、实践与个人成长的平台。
   在这里，你可以了解我的过去、现在、未来，并加深对我的了解。
   希望你能在这里找到有价值的内容，并欢迎随时联系交流。</p>
+            <ul class="content-nav">
+                <li><a href="#Thoughts">想说的话 (Thoughts)</a></li>
+                <li><a href="#About Me">人生发展轴 (About Me)</a></li>
+                <li><a href="#Insights">世界之我见 (Insights)</a></li>
+            </ul>
             <a href="#upgrade" class="btn-upgrade">了解更多</a>
         </div>
         <video class="hero-video fade-in" id="heroVideo" autoplay muted loop playsinline></video>
         <div class="loading-indicator" id="loadingIndicator">加载中...</div>
         <div class="hero-overlay-gradient"></div>
     </section>
-    <script>
-        document.querySelector('.nav-links a[href="#contact"]').addEventListener('click', function(e) {
-            e.preventDefault();
-            var contactSection = document.getElementById('contact');
-            contactSection.style.display = contactSection.style.display === 'block' ? 'none' : 'block';
-        });
-    </script>
     <script>
         const videoElement = document.getElementById('heroVideo');
         const loadingIndicator = document.getElementById('loadingIndicator');
@@ -524,9 +562,6 @@
         setInterval(changeVideo, 17000);
     </script>
     <script>
-        // 移除之前的点击事件监听器
-        document.querySelector('.nav-links a[href="#contact"]').removeEventListener('click', toggleContact);
-        
         // 鼠标悬停显示联系方式
         function showContactInfo() {
             var tooltip = document.getElementById('contactTooltip');
@@ -566,9 +601,9 @@
                 tooltip.remove();
             }, 2000);
         }
-
-        // 为导航栏链接添加提示框功能（可选）
-        document.querySelectorAll('.nav-links a').forEach(link => {
+        
+        // 为导航栏链接添加提示框功能
+        document.querySelectorAll('.content-nav a').forEach(link => {
             link.addEventListener('mouseover', () => {
                 showTooltip(link, '点击跳转至对应章节');
             });
@@ -596,7 +631,7 @@
         }
     </script>
     <footer>
-        &copy; 2025 彭涛的个人网站 (TysonPT's Personal Website). 保留所有权利.
+        &copy; 2025 想说的话 (Thoughts) 人生发展轴 (About Me) 世界之我见 (Insights). 保留所有权利.
     </footer>
 </body>
 </html> 
