@@ -505,12 +505,12 @@
         // 检测是否为移动设备
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
-        // 视频源列表 - 根据实际目录中的文件顺序
+        // 视频源列表 - 最新播放顺序
         const videoSources = [
+            "static/videos/4.mp4",
             "static/videos/1.mp4",
-            "static/videos/2.mp4",
             "static/videos/3.mp4",
-            "static/videos/4.mp4"
+            "static/videos/2.mp4"
         ];
 
         // 总是从第一个视频开始播放
