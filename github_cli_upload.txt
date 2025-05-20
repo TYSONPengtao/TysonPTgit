@@ -1,0 +1,45 @@
+# 命令行上传项目
+
+## 解决连接问题
+
+如果遇到 "Connection was reset" 错误，可能是以下原因导致的：
+
+1. 网络连接问题
+   - 确认电脑已正常连接到互联网
+   - 尝试切换网络（如从WiFi切换到手机热点）
+
+2. 代理或防火墙设置
+   - 如果使用代理，可以设置git使用代理：
+     ```
+     git config --global http.proxy http://yourproxy:port
+     ```
+   - 尝试暂时关闭防火墙
+
+3. 使用令牌认证
+   ```
+   git remote set-url origin https://[你的GitHub用户名]:[你的个人访问令牌]@github.com/[你的GitHub用户名]/TysonPTgit.git
+   ```
+
+## 上传步骤
+
+1. 确认远程仓库已正确设置：
+   ```
+   git remote -v
+   ```
+
+2. 推送代码到GitHub：
+   ```
+   git push -u origin main
+   ```
+
+3. 输入你的GitHub用户名和密码(或个人访问令牌)
+
+4. 上传完成后，在GitHub启用GitHub Pages（见github_upload_steps.txt文件第5步）
+
+## 获取个人访问令牌
+
+1. 登录GitHub
+2. 点击右上角头像 > Settings > Developer settings
+3. 选择Personal access tokens > Tokens (classic)
+4. 生成新令牌，勾选"repo"权限
+5. 复制生成的令牌（只会显示一次） 

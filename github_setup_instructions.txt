@@ -1,0 +1,37 @@
+# GitHub 设置指南
+
+## 1. 创建 GitHub 仓库
+
+1. 访问 GitHub.com 并登录你的账户
+2. 点击右上角的 "+" 图标，选择 "New repository"
+3. 将仓库命名为 "TysonPTgit"
+4. 描述可选填
+5. 选择仓库为公开（Public）或私有（Private）
+6. 不要初始化仓库，因为我们已经有本地文件
+7. 点击 "Create repository"
+
+## 2. 连接本地仓库到 GitHub
+
+在命令行中执行以下命令（替换 YOUR_USERNAME 为你的 GitHub 用户名）：
+
+```
+git remote add origin https://github.com/YOUR_USERNAME/TysonPTgit.git
+git branch -M main
+git push -u origin main
+```
+
+## 3. 启用 GitHub Pages
+
+1. 在 GitHub 上访问你的仓库
+2. 点击 "Settings"
+3. 滚动到 "GitHub Pages" 部分
+4. 在 "Source" 下拉菜单中选择 "main" 分支
+5. 点击 "Save"
+6. 等待几分钟，你的网站将在 https://YOUR_USERNAME.github.io/TysonPTgit/ 上线
+
+## 4. 自定义域名（可选）
+
+如果你想使用自定义域名：
+
+1. 在 GitHub Pages 设置中输入你的域名
+2. 在你的域名提供商处添加 DNS 记录，指向 GitHub Pages 

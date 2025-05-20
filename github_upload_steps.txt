@@ -1,0 +1,27 @@
+# 使用GitHub Desktop上传项目
+
+1. 下载并安装GitHub Desktop: https://desktop.github.com/
+
+2. 运行GitHub Desktop并登录到你的GitHub账号
+
+3. 添加本地仓库:
+   - 点击"File" > "Add local repository"
+   - 浏览并选择 E:\TysonPT\TysonPTgit 文件夹
+   - 点击"Add repository"
+
+4. 发布仓库:
+   - GitHub Desktop会自动检测到这是一个未发布的仓库
+   - 点击"Publish repository"按钮
+   - 输入仓库名称: TysonPTgit
+   - 选择是否为公开或私有仓库
+   - 点击"Publish repository"
+
+5. 启用GitHub Pages:
+   - 上传完成后，访问 https://github.com/[你的用户名]/TysonPTgit
+   - 点击"Settings"
+   - 左侧菜单中找到"Pages"
+   - 在"Source"部分选择"Deploy from a branch"
+   - 选择"main"分支和"/(root)"文件夹
+   - 点击"Save"
+
+6. 几分钟后，你的网站将可以通过 https://[你的用户名].github.io/TysonPTgit/ 访问 

@@ -1,0 +1,20 @@
+# GitHub 命令
+
+运行以下命令添加新的 origin 远程仓库（将 YOUR_USERNAME 替换为你的 GitHub 用户名）：
+
+```
+git remote add origin https://github.com/YOUR_USERNAME/TysonPTgit.git
+git push -u origin main
+```
+
+这将会把你的本地仓库推送到 GitHub 上的新仓库。
+
+推送完成后，你可以在 GitHub 的仓库页面上启用 GitHub Pages：
+
+1. 点击 "Settings" 选项卡
+2. 在左侧菜单中找到 "Pages"
+3. 在 "Source" 部分，选择 "Deploy from a branch"
+4. 在 "Branch" 下拉菜单中选择 "main"，文件夹选择 "/ (root)"
+5. 点击 "Save"
+
+几分钟后，你的网站将可以通过 https://YOUR_USERNAME.github.io/TysonPTgit/ 访问。 
