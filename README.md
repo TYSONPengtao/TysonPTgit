@@ -24,7 +24,7 @@
 
 ## 部署
 
-本网站通过GitHub Pages部署，访问地址：https://[your-github-username].github.io/TysonPTgit/
+本网站通过GitHub Pages部署，访问地址：https://TYSONPengtao.github.io/TysonPTgit/
 
 ## 版权信息
 
